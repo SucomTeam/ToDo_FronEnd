@@ -8,7 +8,13 @@
     />
   </div>
 
-  <div class="listLength-custom">남아있는 할일 개수 : {{ leftListCount }}</div>
+  <div class="listLength-custom">
+    <v-chip-group filter v-model="filterSelection">
+      <v-chip>해야할일</v-chip>
+      <v-chip>완료한일</v-chip>
+    </v-chip-group>
+    <div>남아있는 할일 개수 : {{ leftListCount }}</div>
+  </div>
 
   <div class="item-box-outside-custom">
     <div class="item-box-custom" v-for="item in reviewList" :key="item.id">
@@ -42,13 +48,6 @@
           </button>
         </div>
       </div>
-    </div>
-
-    <div class="listLength-custom">
-      <v-chip-group filter v-model="filterSelection">
-        <v-chip>해야할일</v-chip>
-        <v-chip>완료한일</v-chip>
-      </v-chip-group>
     </div>
   </div>
 </template>
@@ -261,6 +260,8 @@ export default {
 }
 
 .listLength-custom {
+  display: flex;
+  flex-direction: column;
   width: 70%;
   margin: auto;
   font-size: 11px;
