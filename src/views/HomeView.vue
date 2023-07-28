@@ -8,7 +8,7 @@
     />
   </div>
 
-  <div class="listLength-custom">남아있는 할일 갯수 : {{ leftListCount }}</div>
+  <div class="listLength-custom">남아있는 할일 개수 : {{ leftListCount }}</div>
 
   <div class="item-box-outside-custom">
     <div class="item-box-custom" v-for="item in reviewList" :key="item.id">
