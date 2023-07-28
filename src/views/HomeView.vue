@@ -79,20 +79,22 @@ export default {
         console.log(err);
       });
 
-      watch(filterSelection, (selection, prevSelection) => {
-        axios
-          .get("/api/v1/todo/get", {params: {
-            completion : selection
-          }})
-          .then((res) => {
-            console.log(res.data);
-            reviewList.value = res.data;
-            console.log("reviewList.value", reviewList.value);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      });
+    watch(filterSelection, (selection, prevSelection) => {
+      axios
+        .get("/api/v1/todo/get", {
+          params: {
+            completion: selection,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          reviewList.value = res.data;
+          console.log("reviewList.value", reviewList.value);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
 
     return {
       todo,
