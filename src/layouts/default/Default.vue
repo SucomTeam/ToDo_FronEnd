@@ -6,7 +6,18 @@
   </v-app>
 </template>
 
-<script setup>
+<script>
 import DefaultBar from "./AppBar.vue";
 import DefaultView from "./View.vue";
+
+export default {
+  components: {
+    DefaultBar,
+    DefaultView,
+  },
+
+  setup() {
+    return {};
+  },
+};
 </script>
