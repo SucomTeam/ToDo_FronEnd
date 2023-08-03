@@ -11,6 +11,7 @@
 
       <v-text-field
         v-model="password"
+        type="password"
         :rules="[password_rule]"
         color="primary"
         label="비밀번호"
