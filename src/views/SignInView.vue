@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     form: false,
@@ -51,12 +53,12 @@ export default {
 
       // API 요청 구간
       axios
-        .post("", loginData)
+        .post("/api/v1/member/signin", loginData)
         .then((res) => {
-          conosle.log(res);
+          console.log(res.data);
         })
         .catch((err) => {
-          conosle.log(err);
+          console.log(err.response.data.message);
         });
     },
     username_rule(v) {
