@@ -6,6 +6,8 @@
       ToDo
     </v-app-bar-title>
 
+    <v-btn to="/chatroom">채팅방</v-btn>
+
     <v-btn to="/signup">회원가입</v-btn>
 
     <v-btn to="/signin">로그인</v-btn>
