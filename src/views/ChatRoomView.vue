@@ -25,15 +25,9 @@ export default {
   setup() {
     const roomList = ref([]);
 
-    const socket = io("http://localhost:8005/room", {
-      path: "/socket.io",
-      transports: ["websocket"],
-      withCredentials: true,
-    });
-
     const chatRoomList = () => {
       axios
-        .get("http://localhost:8005/room")
+        .get(`http://localhost:8005/room`)
         .then((res) => {
           roomList.value = res.data.roomList;
         })
@@ -58,6 +52,12 @@ export default {
 
       chatRoomList();
     };
+
+    const socket = io("http://localhost:8005/room", {
+      path: "/socket.io",
+      transports: ["websocket"],
+      withCredentials: true,
+    });
 
     const joinRoom = () => {
       socket.emit(

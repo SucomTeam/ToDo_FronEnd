@@ -35,21 +35,26 @@
 
 <script>
 import axios from "axios";
+import { ref } from "vue";
+import { useUserStore } from "@/stores/user";
+import { useRouter } from "vue-router";
 
 export default {
-  data: () => ({
-    form: false,
-    username: "",
-    password: "",
-  }),
+  setup() {
+    const form = ref(false);
+    const username = ref("");
+    const password = ref("");
 
-  methods: {
-    onSubmit() {
-      if (!this.form) return;
+    const userStore = useUserStore();
+
+    const router = useRouter();
+
+    const onSubmit = () => {
+      if (!form.value) return;
 
       const loginData = {
-        username: this.username,
-        password: this.password,
+        username: username.value,
+        password: password.value,
       };
 
       // API 요청 구간
@@ -57,17 +62,26 @@ export default {
         .post("/api/v1/member/signin", loginData)
         .then((res) => {
           console.log(res.data);
+          userStore.login(res.data);
+          router.push("/");
         })
         .catch((err) => {
           console.log(err.response.data.message);
         });
-    },
-    username_rule(v) {
-      return !!v || "아이디를 입력하세요.";
-    },
-    password_rule(v) {
-      return !!v || "비밀번호를 입력하세요.";
-    },
+    };
+
+    return {
+      form,
+      username,
+      password,
+      onSubmit,
+      username_rule(v) {
+        return !!v || "아이디를 입력하세요.";
+      },
+      password_rule(v) {
+        return !!v || "비밀번호를 입력하세요.";
+      },
+    };
   },
 };
 </script>

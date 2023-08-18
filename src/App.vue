@@ -1,7 +1,15 @@
 <template>
-  <router-view />
+  <v-app>
+    <v-main>
+      <app-bar />
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-export default {};
+import AppBar from "./layouts/default/AppBar.vue";
+export default {
+  components: { AppBar },
+};
 </script>

@@ -49,12 +49,15 @@
 <script>
 import axios from "axios";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const username = ref("");
     const password = ref("");
     const nickname = ref("");
+
+    const router = useRouter();
 
     const onSubmit = () => {
       if (!formValidation()) {
@@ -65,9 +68,10 @@ export default {
         };
 
         axios
-          .post("/api/v1/signup", formData)
+          .post("/api/v1/member/signup", formData)
           .then((res) => {
             console.log(res);
+            router.push("/signin");
           })
           .catch((err) => {
             console.log(err);
