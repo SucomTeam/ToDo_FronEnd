@@ -1,11 +1,11 @@
 <template>
   <div v-if="room.length !== 0">
-    <v-card width="400" @click="joinRoom">
-      <template v-slot:title> {{ room.roomId }} </template>
+    <v-card width="400" @click="joinRoom(room.room_id)">
+      <template v-slot:title> {{ room.room_id }} </template>
 
-      <template v-slot:subtitle> {{ room.title }} </template>
+      <template v-slot:subtitle> {{ room.room_id }} </template>
 
-      <template v-slot:text> {{ room.owner }} </template>
+      <template v-slot:text> {{ room.owner_no }} </template>
     </v-card>
   </div>
 </template>
@@ -19,8 +19,8 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const joinRoom = () => {
-      emit("join");
+    const joinRoom = (roomId) => {
+      emit("join", roomId);
     };
 
     return {

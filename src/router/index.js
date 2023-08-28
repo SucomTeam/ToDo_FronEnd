@@ -22,6 +22,11 @@ const routes = [
     name: "ChatRoomView",
     component: () => import("@/views/ChatRoomView.vue"),
   },
+  {
+    path: "/chatList/:roomId",
+    name: "ChatListView",
+    component: () => import("@/views/ChatListView.vue"),
+  },
 ];
 
 const router = createRouter({

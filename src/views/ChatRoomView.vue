@@ -6,7 +6,7 @@
 
     <chat-room
       v-for="room in roomList"
-      :key="room.roomId"
+      :key="room.room_id"
       :room="room"
       @join="joinRoom"
     >
@@ -19,16 +19,24 @@ import io from "socket.io-client";
 import axios from "axios";
 import { ref } from "vue";
 import ChatRoom from "../components/ChatRoom.vue";
+import { useUserStore } from "@/stores/user";
+import { useRouter } from "vue-router";
 
 export default {
   components: { ChatRoom },
   setup() {
+    const userStore = useUserStore();
+    const user = userStore.getUser();
+
     const roomList = ref([]);
+
+    const router = useRouter();
 
     const chatRoomList = () => {
       axios
         .get(`http://localhost:8005/room`)
         .then((res) => {
+          console.log(res.data);
           roomList.value = res.data.roomList;
         })
         .catch((err) => {
@@ -39,9 +47,10 @@ export default {
     chatRoomList();
 
     const createChatRoom = () => {
+      console.log(user.id);
       axios
         .post("http://localhost:8005/room", {
-          ownerId: socket.id,
+          ownerId: user.id,
         })
         .then((res) => {
           console.log(res);
@@ -59,11 +68,8 @@ export default {
       withCredentials: true,
     });
 
-    const joinRoom = () => {
-      socket.emit(
-        "join",
-        socket.id + "_" + new URL(location).pathname.split("/").at(-1)
-      );
+    const joinRoom = (roomId) => {
+      router.push(`/chatList/${roomId}`);
     };
 
     return {
